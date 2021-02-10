@@ -1,6 +1,16 @@
 From the output of etimer-buzzer.c, note down the value of CLOCK_SECOND. Find out
 how many clock ticks corresponds to 1s in real time.
 
+
+With DriverLib v0.47020
+TI CC2650 SensorTag
+IEEE 802.15.4: Yes, Sub-GHz: No, BLE: Yes, Prop: Yes
+ Net: sicslowpan
+ MAC: CSMA
+ RDC: ContikiMAC, Channel Check Interval: 16 ticks
+ RF: Channel 25
+ Node ID: 2920
+ The value of CLOCK_SECOND is 128 
 Time(E): 1 (cnt) 152 (ticks) 1.187 (sec) => 128
 Time(E): 2 (cnt) 281 (ticks) 2.195 (sec) => 129
 Time(E): 3 (cnt) 410 (ticks) 3.203 (sec) => 128
