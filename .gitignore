@@ -1,0 +1,6 @@
+./*.zip
+./*.rar
+*.zip
+*.rar
+**/*.zip
+**/*.rar
