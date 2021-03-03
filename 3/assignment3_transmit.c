@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "net/rime/rime.h"
 #include <stdio.h>
+#include "sys/etimer.h"
 /*---------------------------------------------------------------------------*/
 
 
@@ -34,22 +35,29 @@ static void send(char message[], int size){
 static int pointer = 0;
 static void messageInc(){
      message[pointer]+= 1;
-     if(message[pointer] > 122){
-	if(pointer ==50){pointer=0;}     	
-	else {pointer += 1;}
-     }
+     if(message[pointer] > 121){
+    	if(pointer ==49){
+    	    pointer=0;
+    	    message[pointer] = 65;
+    	}     	
+    	else {
+    	    pointer += 1;
+    	    message[pointer] = 65;
+    	}
+    }
 }
 
+//Set timer to send 4 packets every second for at least 10 seconds.
 PROCESS_THREAD(transmit_process, ev, data) {
-
+	
+	static struct etimer timer_etimer;
 	PROCESS_EXITHANDLER(unicast_close(&uc);)
 	PROCESS_BEGIN();
 	unicast_open(&uc, 146, &unicast_callbacks);
 	send(message, 50);
 	messageInc();
-
-
-
+	etimer_set(&timer_etimer, CLOCK_SECOND);  //1s timer
+	PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_TIMER);
    PROCESS_END();
 }
 
