@@ -8,7 +8,7 @@
 /*---------------------------------------------------------------------------*/
 
 static struct etimer timer_etimer;
-static char message[50] = {65};
+static char message[50] = {48};
 static void send(char message[], int size);
 static void messageInc();
 
@@ -37,14 +37,14 @@ static void send(char message[], int size) {
 static int pointer = 0;
 static void messageInc() {
       message[pointer]+= 1;
-      if(message[pointer] > 121) {
+      if(message[pointer] > 57) {
          if(pointer == 49) {
             pointer=0;
-            message[pointer] = 65;
+            message[pointer] = 48;
          }        
       else {
          pointer += 1;
-         message[pointer] = 65;
+         message[pointer] = 48;
       }
    }
 }
@@ -56,7 +56,14 @@ PROCESS_THREAD(transmit_process, ev, data) {
    while (1) {
       send(message, 50);
       messageInc();
-      etimer_set(&timer_etimer, CLOCK_SECOND / 4);
+      send(message, 50);
+      messageInc();
+      send(message, 50);
+      messageInc();
+      send(message, 50);
+      messageInc();
+
+      etimer_set(&timer_etimer, CLOCK_SECOND);
       PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_TIMER);
    }
    PROCESS_END();
