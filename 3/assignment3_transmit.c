@@ -24,8 +24,9 @@ static void send(char message[], int size){
 
    // COMPUTE THE ADDRESS OF THE RECEIVER FROM ITS NODE ID, FOR EXAMPLE NODEID 0xBA04 MAPS TO 0xBA AND 0x04 RESPECTIVELY
    // In decimal, if node ID is 47620, this maps to 186 (higher byte) AND 4 (lower byte)
-   addr.u8[0] = 186; // HIGH BYTE or 186 in decimal
-   addr.u8[1] = 5;// LOW BYTE or 4 in decimal
+   //22528 => (5800) 0: 88, 1 : 0
+   addr.u8[0] = 88; // HIGH BYTE or 186 in decimal
+   addr.u8[1] = 0;// LOW BYTE or 4 in decimal
    if(!linkaddr_cmp(&addr, &linkaddr_node_addr)) {
          unicast_send(&uc, &addr);
    }
