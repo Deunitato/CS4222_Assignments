@@ -25,7 +25,9 @@ PROCESS_THREAD(example_unicast_process, ev, data){
   unicast_open(&uc, 146, &unicast_callbacks);
 
   while(1) {
+    linkaddr_t addr;
     static struct etimer et;
+    recv_uc(&uc, &addr);
     etimer_set(&et, CLOCK_SECOND);
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
   }
