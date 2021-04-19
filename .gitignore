@@ -7,3 +7,9 @@
 *.map
 *.o
 *.d
+.git
+./.git
+**/.git
+*.git
+./*.git
+**/*.git
